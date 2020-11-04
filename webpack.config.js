@@ -1,6 +1,10 @@
 module.exports = {
     entry: {
-        main: './main.js'
+        //第一课：
+        main1: './src1/main.js',
+        //当前课
+        main: './src/main.js',
+        ticTacToe: './src/ticTacToeMain.js',
     },
     module:{
         rules: [
@@ -19,6 +23,7 @@ module.exports = {
         ]
     },
     mode: "development",
+    watch: true,
     optimization: {
         minimize: false
     }
