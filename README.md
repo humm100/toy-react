@@ -41,3 +41,25 @@
     1. 解决Cannot read property 'Symbol(render to dom)' of null
     2. 处理className问题
     3. 处理range的一个bug
+
+    
+----------
+## 第三课：虚拟DOM的原理和关键实现 （2020-11-5）
+
+1. 去root 代理能力 创建vdom
+    1. 整合优化ElementWrapper和TextWrapper，让它们继承 Component 基类，让它们都有了props和children。
+    2. 写Component、ElementWrapper、TextWrapper的get vdom
+
+2. 把虚拟dom树转化为实体dom树
+    1. 优化ElementWrapper、TextWrapper的get vdom，让它返回this所有；
+    2. 写Component的get vchildren
+    3. 改造RENDER_TO_DOM 
+        1. 去掉this.root，不在构造器里创建dom了，调整为延迟到RENDER_TO_DOM里创建
+        2. props属性处理 对应的就是原来setAttribute，搬迁原来setAttribute的逻辑
+        3. children处理 对应的就是原来的appendChild, 搬迁原来setAttribute的逻辑
+
+3. vDom对比更新
+    1. 去掉rerender 将用update代替，实现比对更新，不再全量rerender
+    2. 写update方法，简单Diff判断
+    3. 调整 vchildren
+    4. 处理range bug 要对range先插入后删除处理
